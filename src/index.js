@@ -80,7 +80,7 @@ function renderCurrentWeather(data, weatherObj) {
 
 
     cityDiv.textContent = `${data.name}, ${data.country}`
-    let dateFormatted = format(new Date(weatherObj.current_weather.time), `EEE, do LLL yyy, hh aaa`)
+    let dateFormatted = format(new Date(weatherObj.current_weather.time), `EEE, do LLL yyy, hh AAA`)
     dateDiv.textContent = dateFormatted
     
     currentTempDiv.textContent = `${weatherObj.current_weather.temperature} °C`
