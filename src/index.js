@@ -4,13 +4,16 @@ import './style.css'
 const API_KEY_LOCATION = "bf4f379df284cb438eb676f583a170c3"
 const searchForm = document.getElementById('searchForm')
 const locationInput = document.getElementById('locationInput')
+const updateBtn = document.querySelector('.reload-container')
+const message = document.querySelector('.message')
+let locationName
 
 searchForm.addEventListener('submit', handleSearch)
 locationInput.oninput = () => clearMessage()
 document.addEventListener('DOMContentLoaded', () => handleSearch())
+updateBtn.onclick = (e) => handleSearch(e)
 
 async function handleSearch(event) {
-    let locationName
     if (event === undefined) {
         locationName = 'Rome, Italy'
     } else {
@@ -22,7 +25,7 @@ async function handleSearch(event) {
     try {
         fetchData(locationName)
     } catch (error) {
-        document.querySelector('.message').style.visibility = "visible"
+        displayLocationError()
     }
     searchForm.reset()
 }
@@ -36,7 +39,7 @@ async function fetchData(locationName) {
         let longitude = locationData[0].lon;
         locationWeather = await fetchLocationWeather(latitude, longitude)
     } catch (error) {
-        console.log(error)
+        displayDataError()
     }
     renderCurrentWeather(locationData[0], locationWeather)
     renderForecast(locationWeather)
@@ -76,8 +79,8 @@ function renderCurrentWeather(data, weatherObj) {
     const humidity = document.querySelector('.humidity')
 
 
-    cityDiv.textContent = data.name
-    let dateFormatted = format(new Date(weatherObj.current_weather.time), `EEE, do LLL yyy`)
+    cityDiv.textContent = `${data.name}, ${data.country}`
+    let dateFormatted = format(new Date(weatherObj.current_weather.time), `EEE, do LLL yyy, hh:mm aaa`)
     dateDiv.textContent = dateFormatted
     
     currentTempDiv.textContent = `${weatherObj.current_weather.temperature} °C`
@@ -315,8 +318,18 @@ function renderWW(weatherCode, isDay) {
     }
 }
 
+function displayLocationError() {
+    message.textContent = 'Location not found.'
+    message.style.visibility = "visible"
+}
+
+function displayDataError() {
+    message.textContent = 'Data not available for this location.'
+    message.style.visibility = "visible"
+}
+
 function clearMessage() {
-    document.querySelector('.message').style.visibility = "hidden"
+    message.style.visibility = "hidden"
 }
 
 function getWindDirection(degrees) {
@@ -363,11 +376,11 @@ function createDivs(maxT, minT, day, ww) {
 
     const maxTempDiv = document.createElement('h3')
     maxTempDiv.classList.add('t-max')
-    maxTempDiv.textContent = maxT
+    maxTempDiv.textContent = `${maxT} °C`
 
     const minTempDiv = document.createElement('p')
     minTempDiv.classList.add('t-max')
-    minTempDiv.textContent = minT
+    minTempDiv.textContent = `${minT} °C`
 
     dayDiv.appendChild(dayNameDiv)
     dayDiv.appendChild(imgDiv)
