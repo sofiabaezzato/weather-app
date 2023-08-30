@@ -1,3 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+
+/*
+************************************************************
+************************************************************
+*/
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+
 body {
-    color: red;
+    color: white;
+    background-image: url('./assets/gradient.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-family: var(--body-font);
+    font-weight: 600;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+/*     height: 100%;
+    background-color: var(--neutral-color);
+    
+    color: var(--font-color);
+    font-size: var(--normal-font-size);
+    scroll-behavior: smooth; */
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+/* ======== COLORS & FONTS ======== */
+:root {
+    --first-color: #dc2626;
+    --font-color: #1a1818;
+    --gray-color: #3f3f3f;
+    --light-gray-color: #f1f1f1;
+    --neutral-color: #f7f7f7;
+    --body-font: 'Roboto', sans-serif;
+    --big-font-size: 4rem;
+    --h1-font-size: 3rem;
+    --h2-font-size: 2rem;
+    --h3-font-size: 1.5rem;
+    --normal-font-size: .8rem;
+    --small-font-size: .7rem;
+}
+
+
+h1 {
+    font-size: var(--h1-font-size);
+    font-size: 2;
+}
+
+h2 {
+    font-size: var(--h2-font-size);
+    font-weight: var(--font-medium);
+}
+
+h3 {
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-medium);
+}
+
+/* ======================================================== */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    gap: 1rem;
+}
+
+.info-container {
+    background: rgba( 255, 255, 255, 0.15 );
+    box-shadow: 0 8px 32px 0 rgba(170, 170, 170, 0.1);
+    backdrop-filter: blur( 8px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.1 );
+    padding: 2rem;
+}
+
+#searchForm {
+    border-bottom: 2px solid white;
+    display: flex;
+    align-items: center;
+}
+
+.form-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+input[type='text'] {
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-family: var(--body-font);
+    padding: 10px;
+    height: initial;
+    outline: none;
+    resize: none;
+    width: 100%;
+    background-color: inherit;
+    color: white;
+}
+
+input::placeholder,
+input::-ms-input-placeholder {
+    color: white;
+    opacity: 1;
+}
+
+.btn {
+    background: url("assets/magnifying-glass-solid.svg") no-repeat transparent;
+    background-position: center;
+    height: 30px;
+    width: 30px;
+    border: none;
+    padding: 10px;
+
+}
+
+input:focus {
+    background-color: inherit;
+}
+
+.message {
+    visibility: hidden;
+    font-weight: 400;
+}
+
+.ww-img {
+    height: 100px;
+    width: 100px;
+
+}
+
+.city-div {
+    font-weight: 400;
+}
+
+.date-div {
+    font-weight: 400;
+}
+
+.weather-info-container {
+    width: 100%;
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.temp-info,
+.wind-info,
+.humidity-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+}
+
+
+.default-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+}
+
+.temp-text-container,
+.wind-text-container,
+.humidity-text-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.forecast-container {
+    margin-top: 2rem;
+    padding: 2rem;
+    gap: 2rem;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.days-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    gap: 5px;
+}
+
+.day-name {
+    font-weight: 600;
 }

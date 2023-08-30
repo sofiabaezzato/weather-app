@@ -6,8 +6,56 @@
     <title>Weather App</title>
 <script defer src="main.js"></script></head>
 <body>
-    <h1>Weather App</h1>
-    <h3>Work in Progress</h3>
-    <p class="">Best app out there</p>
+    <div class="info-container main-container">
+        <div class="form-div">
+            <form action="" id="searchForm">
+                <input
+                    type="text"
+                    name="location"
+                    id="locationInput"
+                    placeholder="Search location"
+                    autofocus
+                >
+                <button class="btn" type="submit" id="submitBtn"></button>
+            </form>
+            <p class="message">Location not found.</p>
+        </div>
+
+        <img class="ww-img" src="" alt="">
+        <h3 class="ww-description-div"></h3>
+        <h1 class="current-temp-div"></h1>
+        <h3 class="city-div"></h3>
+        <p class="date-div"></p>
+
+        <div class="weather-info-container">
+            <div class="temp-info">
+                <img class="default-icon" src="../dist/assets/icons/wi-thermometer.svg" alt="">
+                <div class="temp-text-container">
+                    <h3 class="t-max">24 °C</h3>
+                    <p class="t-min">12 °C</p>
+                </div>
+            </div>
+
+            <div class="wind-info">
+                <img class="default-icon" src="../dist/assets/icons/wi-strong-wind.svg" alt="">
+                <div class="wind-text-container">
+                    <h3 class="wind-speed"></h3>
+                    <p class="wind-direction"></p>
+                </div>
+            </div>
+
+            <div class="humidity-info">
+                <img class="default-icon" src="../dist/assets/icons/wi-humidity.svg" alt="">
+                <div class="humidity-text-container">
+                    <h3 class="humidity">33 %</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-container forecast-container">
+        <h2>Next days</h2>
+        <div class="days-container"></div>
+    </div>
 </body>
 </html>
