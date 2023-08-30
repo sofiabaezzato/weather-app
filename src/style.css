@@ -238,6 +238,10 @@ input:focus {
     scale: 1.1;
 }
 
+.reload-container:active {
+    scale: .9;
+}
+
 #reloadBtn {
     height: 40px;
     width: 40px;

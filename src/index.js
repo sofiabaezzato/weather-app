@@ -16,7 +16,7 @@ updateBtn.onclick = (e) => handleSearch(e)
 async function handleSearch(event) {
     if (event === undefined) {
         locationName = 'Rome, Italy'
-    } else {
+    } else if (event.type === 'submit') {
         event.preventDefault()
         locationName = locationInput.value
     }
@@ -47,7 +47,7 @@ async function fetchData(locationName) {
 
 async function fetchLocationData(city) {
     try {
-        const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY_LOCATION}`)
+        const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY_LOCATION}`)
         const coordinates = await response.json()
         return coordinates
     } catch (error) {
@@ -80,7 +80,7 @@ function renderCurrentWeather(data, weatherObj) {
 
 
     cityDiv.textContent = `${data.name}, ${data.country}`
-    let dateFormatted = format(new Date(weatherObj.current_weather.time), `EEE, do LLL yyy, hh:mm aaa`)
+    let dateFormatted = format(new Date(weatherObj.current_weather.time), `EEE, do LLL yyy, hh aaa`)
     dateDiv.textContent = dateFormatted
     
     currentTempDiv.textContent = `${weatherObj.current_weather.temperature} °C`
