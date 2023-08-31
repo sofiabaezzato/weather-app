@@ -57,7 +57,7 @@ a {
 :root {
     --body-font: 'Roboto', sans-serif;
     --h1-font-size: 2.5rem;
-    --h2-font-size: 2rem;
+    --h2-font-size: 1.4rem;
     --h3-font-size: 1rem;
     --normal-font-size: .85rem;
     --small-font-size: .7rem;
@@ -159,11 +159,9 @@ input:focus {
 
 }
 
-/* .city-div {
-    font-weight: 400;
-} */
 
-.date-div {
+.date-div,
+.hour-div {
     font-weight: 400;
 }
 
@@ -230,21 +228,8 @@ input:focus {
     display: flex;
     align-items: center;
     margin-top: 1.5rem;
-    cursor: pointer;
-    transition: .2s ease-in-out;
-}
-
-.reload-container:hover {
-    scale: 1.1;
-}
-
-.reload-container:active {
-    scale: .9;
-}
-
-#reloadBtn {
-    height: 40px;
-    width: 40px;
+    font-size: var(--small-font-size);
+    font-weight: 400;
 }
 
 @media screen and (max-width: 540px){

@@ -4,29 +4,24 @@ import './style.css'
 const API_KEY_LOCATION = "bf4f379df284cb438eb676f583a170c3"
 const searchForm = document.getElementById('searchForm')
 const locationInput = document.getElementById('locationInput')
-const updateBtn = document.querySelector('.reload-container')
-const message = document.querySelector('.message')
-let locationName
+let locationName = JSON.parse(localStorage.getItem('currentLocation')) || 'Rome, Italy'
 
-searchForm.addEventListener('submit', handleSearch)
+searchForm.addEventListener('submit', (event) => {
+    event.preventDefault()
+    locationName = locationInput.value
+    handleSearch()
+})
+
 locationInput.oninput = () => clearMessage()
 document.addEventListener('DOMContentLoaded', () => handleSearch())
-updateBtn.onclick = (e) => handleSearch(e)
 
-async function handleSearch(event) {
-    if (event === undefined) {
-        locationName = 'Rome, Italy'
-    } else if (event.type === 'submit') {
-        event.preventDefault()
-        locationName = locationInput.value
-    }
-    if (!locationName) return;
-
+async function handleSearch() {
     try {
         fetchData(locationName)
     } catch (error) {
         displayLocationError()
     }
+
     searchForm.reset()
 }
 
@@ -40,7 +35,9 @@ async function fetchData(locationName) {
         locationWeather = await fetchLocationWeather(latitude, longitude)
     } catch (error) {
         displayDataError()
+        return
     }
+    saveLocation(locationName)
     renderCurrentWeather(locationData[0], locationWeather)
     renderForecast(locationWeather)
 }
@@ -69,6 +66,7 @@ async function fetchLocationWeather(lat, lon) {
 function renderCurrentWeather(data, weatherObj) {
     const cityDiv = document.querySelector('.city-div')
     const dateDiv = document.querySelector('.date-div')
+    const hourDiv = document.querySelector('.hour-div')
     const wwDiv = document.querySelector('.ww-description-div')
     const currentTempDiv = document.querySelector('.current-temp-div')
     const wwImg = document.querySelector('.ww-img')
@@ -80,8 +78,12 @@ function renderCurrentWeather(data, weatherObj) {
 
 
     cityDiv.textContent = `${data.name}, ${data.country}`
-    let dateFormatted = format(new Date(weatherObj.current_weather.time), `EEE, do LLL yyy, hh aaa`)
+
+    let dateFormatted = format(new Date(weatherObj.current_weather.time), `EEE, do LLL yyy`)
     dateDiv.textContent = dateFormatted
+
+    let hourFormatted = format(new Date(weatherObj.current_weather.time), `h:mm aa`)
+    hourDiv.textContent = hourFormatted
     
     currentTempDiv.textContent = `${weatherObj.current_weather.temperature} °C`
 
@@ -319,16 +321,19 @@ function renderWW(weatherCode, isDay) {
 }
 
 function displayLocationError() {
+    const message = document.querySelector('.message')
     message.textContent = 'Location not found.'
     message.style.visibility = "visible"
 }
 
 function displayDataError() {
+    const message = document.querySelector('.message')
     message.textContent = 'Data not available for this location.'
     message.style.visibility = "visible"
 }
 
 function clearMessage() {
+    const message = document.querySelector('.message')
     message.style.visibility = "hidden"
 }
 
@@ -394,4 +399,8 @@ function createDivs(maxT, minT, day, ww) {
 function clearContent(divClass) {
     const divToClear = document.querySelector(divClass)
     divToClear.innerHTML = ''
+}
+
+function saveLocation(name) {
+    localStorage.setItem('currentLocation', JSON.stringify(name))
 }
