@@ -40,6 +40,7 @@ body {
     flex-direction: column;
     align-items: center;
 
+
 }
 
 button {
@@ -158,9 +159,9 @@ input:focus {
 .ww-img {
     height: 100px;
     width: 100px;
-
+    margin-top: 20px;
+    margin-bottom: -20px;
 }
-
 
 .date-div,
 .hour-div {
@@ -183,10 +184,13 @@ input:focus {
     font-weight: 400;
 }
 
-
 .default-icon {
     width: 40px;
     height: 40px;
+}
+
+.current-temp-div {
+    margin: 14px 0;
 }
 
 .temp-text-container,
@@ -234,10 +238,22 @@ input:focus {
     font-weight: 400;
 }
 
+#tempIcon {
+    margin: 0 -8px;
+}
+
 @media screen and (max-width: 540px){
-    body {
-        overflow-y: visible;
+    :root {
+        --h1-font-size: 2.2rem;
+        --h2-font-size: 1.1rem;
+        --h3-font-size: .9rem;
+        --normal-font-size: .8rem;
+        --small-font-size: .6rem;
     }
+
+    /* body {
+        overflow-y: visible;
+    } */
 
     .main-container {
         width: 350px;
@@ -249,7 +265,19 @@ input:focus {
         margin: 3rem 0;
         padding: 1rem;
         width: 350px;
+    } 
+}
+
+@media screen and (max-width: 360px){
+
+    /* body {
+        overflow-y: visible;
+    } */
+
+    .info-container {
+        width: 300px;
+        padding: .5rem;
     }
 
-    
+
 }
